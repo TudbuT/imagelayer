@@ -27,6 +27,7 @@ func commands.display {
         ! =window
         ! Window Type POPUP swap setType1
         ! 0 swap setAutoRequestFocus1
+        ! 1 swap setAlwaysOnTop1
         ! 0.0 0.0 0.0 0.0 Color new4 swap setBackground1
         ! args 1 aget stoi swap args 2 aget stoi swap setLocation2
         ! null image getWidth1 swap null image getHeight1 swap setSize2
