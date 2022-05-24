@@ -16,4 +16,9 @@ cat > "$BIN"/imagelayer << "EOF"
 cd $(pwd)
 java -jar ISBPL.jar main.isbpl $@
 EOF
-chmod a+rx "$BIN"/imagelayer
+cat > "$BIN"/showimage << "EOF"
+cd $(pwd)
+clear
+java -jar ISBPL.jar main.isbpl 100 100 $@ > /dev/null
+EOF
+chmod a+rx "$BIN"/imagelayer "$BIN"/showimage
