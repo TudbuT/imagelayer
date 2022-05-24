@@ -1,0 +1,54 @@
+
+"#time.isbpl" include
+"#stream.isbpl" include
+"commands.isbpl" include
+
+def String "java.lang.String" JIO class =String
+def System "java.lang.System" JIO class =System
+
+"use fastputs" #
+func puts {
+    System out print1
+}
+
+func strsplit {
+    swap String &split1 fcall
+}
+func strconcat {
+    _string swap _string String &concat1 fcall
+}
+
+func main {
+    with args ; 
+
+    def stdin "/dev/stdin" STREAM.create.file.in stream =stdin
+    while { 1 } {
+        def s stdin stream.readline =s
+
+        "Java" try {
+            s parse
+        } { pop pop pop }
+    }
+
+    0
+}
+
+func parse {
+    with cmd ;
+    cmd -1 eq if {
+        2000 delay
+        0 System exit1
+    }
+    def args cmd " " strsplit =args
+
+    def command args 0 aget =command
+    "display" command eq if {
+        cmd args commands.display
+    }
+    "stop" command eq if {
+        cmd args commands.stop
+    }
+    "end" command eq if {
+        0 exit
+    }
+}

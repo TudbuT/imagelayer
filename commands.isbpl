@@ -1,0 +1,49 @@
+
+def Wrapper "Wrapper" JIO class =Wrapper
+def Window Wrapper EWindow =Window
+def ImageIO "javax.imageio.ImageIO" JIO class =ImageIO
+def FIS "java.io.FileInputStream" JIO class =FIS
+def Color "java.awt.Color" JIO class =Color
+
+def windows 0 anew =windows
+
+func commands.display {
+    with cmd args ;
+    
+    "display [x] [y] [image]" #
+    args alen 4 eq not if {
+        "ERR 1 Error: Argument length does not match\n" puts
+        2 stop
+    }
+
+    def window
+    def image
+    args 3 aget FIS new1 ImageIO read1 =image
+
+    JIO context { 
+        with graphics ;
+        image 0 0 null graphics drawImage4 pop
+    } Window new2 
+        ! =window
+        ! Window Type POPUP swap setType1
+        ! 0 swap setAutoRequestFocus1
+        ! 0.0 0.0 0.0 0.0 Color new4 swap setBackground1
+        ! args 1 aget stoi swap args 2 aget stoi swap setLocation2
+        ! null image getWidth1 swap null image getHeight1 swap setSize2
+          1 swap setVisible1
+
+    windows alen itos puts "\n" puts
+    windows [ window ] aadd =windows
+}
+
+func commands.stop {
+    with cmd args ;
+
+    "stop [windowid]" #
+    args alen 2 eq not if {
+        "ERR 1 Error: Argument length does not match\n" puts
+        2 stop
+    }
+
+    0 windows args 1 aget stoi aget setVisible1
+}
