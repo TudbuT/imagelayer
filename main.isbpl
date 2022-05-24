@@ -20,6 +20,11 @@ func strconcat {
 
 func main {
     with args ; 
+    args alen 0 eq not if {
+        "" [ "" args 0 aget args 1 aget args 2 aget ] commands.display
+        10000 delay
+        0 2 stop
+    }
 
     def stdin "/dev/stdin" STREAM.create.file.in stream =stdin
     while { 1 } {
