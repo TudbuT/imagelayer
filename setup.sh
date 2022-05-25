@@ -13,12 +13,10 @@ mkdir tmp ; cd tmp
 cd ..
 rm -rf tmp
 cat > "$BIN"/imagelayer << EOF
-cd $(pwd)
-java -jar ISBPL.jar main.isbpl \$@
+java -jar $(pwd)/ISBPL.jar $(pwd)/main.isbpl \$@
 EOF
 cat > "$BIN"/showimage << EOF
-cd $(pwd)
 clear
-java -jar ISBPL.jar main.isbpl 100 100 \$@ > /dev/null
+java -jar $(pwd)/ISBPL.jar $(pwd)/main.isbpl 100 100 \$@ > /dev/null
 EOF
 chmod a+rx "$BIN"/imagelayer "$BIN"/showimage
